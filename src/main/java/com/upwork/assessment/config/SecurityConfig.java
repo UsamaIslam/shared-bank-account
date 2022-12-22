@@ -68,7 +68,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						auth -> auth
 						.requestMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-						.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+						.requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_BANKER")
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
 				.sessionManagement(session -> session

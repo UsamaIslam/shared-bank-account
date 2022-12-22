@@ -2,6 +2,7 @@ package com.upwork.assessment.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Jacksonized
+@ToString
 @Entity
 @Table(name="TransactionDetails")
 public class Transactions {
@@ -31,10 +34,10 @@ public class Transactions {
     @JoinColumn(name = "bank_account_id")
     private BankAccounts bankAccount;
 
-    @Override
-    public String toString() {
-        return "TransactionBean [Account Id =" + bankAccount.getAccountNumber() + ", beneficiaryName=" + beneficiaryName
-                + ", beneficiaryAccountNumber=" + beneficiaryAccountNumber + ", amount=" + amount + ", balanceAmount="
-                + bankAccount.getBalance() + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "TransactionBean [Account Id =" + bankAccount.getAccountNumber() + ", beneficiaryName=" + beneficiaryName
+//                + ", beneficiaryAccountNumber=" + beneficiaryAccountNumber + ", amount=" + amount + ", balanceAmount="
+//                + bankAccount.getBalance() + "]";
+//    }
 }

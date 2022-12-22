@@ -47,9 +47,9 @@ public class StaffController {
     return new ResponseEntity<>(bankAccounts, HttpStatus.OK);
   }
 
-  @PostMapping("/bank-accounts")
+  @PostMapping("/create-bank-accounts")
   public ResponseEntity<BankAccounts> createBankAccount(@RequestBody BankAccounts bankAccounts) {
-    BankAccounts _bankAccounts = bankAccountRepository.save(new BankAccounts(bankAccounts.getTitle(), bankAccounts.getAccountNumber(), true));
+    BankAccounts _bankAccounts = bankAccountRepository.save(bankAccounts);
     return new ResponseEntity<>(_bankAccounts, HttpStatus.CREATED);
   }
 

@@ -2,6 +2,7 @@ package com.upwork.assessment.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import org.hibernate.Hibernate;
 
 import java.math.BigDecimal;
@@ -13,6 +14,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Jacksonized
+@ToString
 @Builder
 @Entity
 @Table(name = "bank_accounts", uniqueConstraints = {
@@ -45,12 +48,8 @@ public class BankAccounts {
         inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
   private Set<Users> users = new HashSet<>();
 
-  @OneToMany(fetch = FetchType.LAZY,
-          cascade = {
-                  CascadeType.PERSIST,
-                  CascadeType.MERGE
-          })
-  @JoinColumn(name = "bank_account_id")
+  @OneToMany(fetch = FetchType.LAZY)
+  @JoinColumn(name = "bank_account_id", insertable=false, updatable=false)
   private Set<Transactions> transactions = new HashSet<>();
 
   public BankAccounts(String title, String accountNumber, boolean active) {
@@ -72,10 +71,10 @@ public class BankAccounts {
     }
   }
 
-  @Override
-  public String toString() {
-    return "Bank [id=" + id + ", title=" + title + ", desc=" + accountNumber + ", published=" + active + "]";
-  }
+//  @Override
+//  public String toString() {
+//    return "Bank [id=" + id + ", title=" + title + ", desc=" + accountNumber + ", published=" + active + "]";
+//  }
 
   @Override
   public boolean equals(Object o) {
