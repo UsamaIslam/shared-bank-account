@@ -51,9 +51,9 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
 		return http
-				.securityMatcher("/token","/swagger-ui/")
+				.securityMatcher("/token","/swagger-ui.html","/swagger-ui/*","/v3/*/*","/v3/*")
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/token","/swagger-ui/").permitAll())
+						.requestMatchers("/token","/swagger-ui.html","/swagger-ui/*","/v3/*/*","/v3/*").permitAll())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.csrf(AbstractHttpConfigurer::disable)
 				.httpBasic(withDefaults())
