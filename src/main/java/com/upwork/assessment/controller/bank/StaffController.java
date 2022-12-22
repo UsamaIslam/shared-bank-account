@@ -90,7 +90,7 @@ public class StaffController {
     return new ResponseEntity<>(bankAccounts, HttpStatus.OK);
   }
 
-  @GetMapping("/users")
+  @GetMapping("/get-all-users")
   public ResponseEntity<List<Users>> getAllUsers() {
 
     List<Users> users = new ArrayList<Users>(usersRepository.findAll());

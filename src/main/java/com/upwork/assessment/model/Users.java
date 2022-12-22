@@ -28,6 +28,7 @@ public class Users {
 	@NonNull
 	@Column(unique = true)
 	private String username;
+	
 	@NonNull
 	private String password;
 
