@@ -67,8 +67,8 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(
 						auth -> auth
-						.requestMatchers("/user").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-						.requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+						.requestMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+						.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
 				.sessionManagement(session -> session

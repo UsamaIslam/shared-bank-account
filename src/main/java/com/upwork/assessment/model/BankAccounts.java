@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +15,9 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "bank_accounts")
+@Table(name = "bank_accounts", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_bankaccounts_accountnumber", columnNames = {"AccountNumber"})
+})
 public class BankAccounts {
 
   @Id
@@ -30,6 +33,8 @@ public class BankAccounts {
   @Column(name = "active")
   private boolean active;
 
+  @Column(name = "balance")
+  private BigDecimal balance;
   @ManyToMany(fetch = FetchType.LAZY,
       cascade = {
           CascadeType.PERSIST,
@@ -40,6 +45,13 @@ public class BankAccounts {
         inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
   private Set<Users> users = new HashSet<>();
 
+  @OneToMany(fetch = FetchType.LAZY,
+          cascade = {
+                  CascadeType.PERSIST,
+                  CascadeType.MERGE
+          })
+  @JoinColumn(name = "bank_account_id")
+  private Set<Transactions> transactions = new HashSet<>();
 
   public BankAccounts(String title, String accountNumber, boolean active) {
     this.title = title;
