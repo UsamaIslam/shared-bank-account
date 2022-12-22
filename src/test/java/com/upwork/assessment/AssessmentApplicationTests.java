@@ -1,9 +1,9 @@
 package com.upwork.assessment;
 
-import com.upwork.assessment.config.MyUser;
+import com.upwork.assessment.config.jwt.MyUser;
 import com.upwork.assessment.config.SecurityConfig;
-import com.upwork.assessment.controller.AuthController;
-import com.upwork.assessment.controller.HomeController;
+import com.upwork.assessment.controller.jwt.AuthController;
+import com.upwork.assessment.controller.jwt.HomeController;
 import com.upwork.assessment.repository.UsersRepository;
 import com.upwork.assessment.service.TokenService;
 import org.junit.jupiter.api.Test;

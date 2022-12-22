@@ -1,4 +1,4 @@
-package com.upwork.assessment.config;
+package com.upwork.assessment.config.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

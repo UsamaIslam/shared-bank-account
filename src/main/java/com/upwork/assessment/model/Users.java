@@ -1,12 +1,19 @@
 package com.upwork.assessment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,7 +23,7 @@ public class Users {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@NonNull
 	@Column(unique = true)
@@ -31,6 +38,18 @@ public class Users {
 					@JoinColumn(name = "AUTHORITIES_ID", referencedColumnName = "ID") })
 	private Set<Authorities> authorities;
 
+
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			},
+			mappedBy = "users")
+	@JsonIgnore
+	@ToString.Exclude
+	private Set<BankAccounts> bankAccounts = new HashSet<>();
+
+
 	@Builder.Default
 	private Boolean accountNonExpired = true;
 	@Builder.Default
@@ -44,4 +63,17 @@ public class Users {
 	private String lastName;
 	private String emailAddress;
 	private LocalDate birthdate;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		Users users = (Users) o;
+		return id != null && Objects.equals(id, users.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

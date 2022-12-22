@@ -1,6 +1,7 @@
-package com.upwork.assessment.config;
+package com.upwork.assessment.service;
 
 
+import com.upwork.assessment.config.jwt.MyUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +27,7 @@ public class MyUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		Optional<Users> userByUsername = usersRepository.findByUsername(username);
-		if (!userByUsername.isPresent()) {
+		if (userByUsername.isEmpty()) {
 			log.error("Could not find user with that username: {}", username);
             throw new UsernameNotFoundException("Invalid credentials!");
 		}
@@ -36,10 +37,10 @@ public class MyUserDetailsService implements UserDetailsService{
             throw new UsernameNotFoundException("Invalid credentials!");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        user.getAuthorities().stream().forEach(authority -> 
+        user.getAuthorities().forEach(authority ->
         grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority())));
         
-        return new MyUser(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities, 
+        return new MyUser(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities,
         		user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getBirthdate());
 	}
 

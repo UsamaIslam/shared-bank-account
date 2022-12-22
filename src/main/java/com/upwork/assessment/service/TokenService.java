@@ -1,7 +1,7 @@
 package com.upwork.assessment.service;
 
-import com.upwork.assessment.config.MyJwtUser;
-import com.upwork.assessment.config.MyUser;
+import com.upwork.assessment.config.jwt.MyJwtUser;
+import com.upwork.assessment.config.jwt.MyUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;

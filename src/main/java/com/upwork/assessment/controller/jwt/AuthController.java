@@ -1,11 +1,10 @@
-package com.upwork.assessment.controller;
+package com.upwork.assessment.controller.jwt;
 
 import com.upwork.assessment.service.TokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

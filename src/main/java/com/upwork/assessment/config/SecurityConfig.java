@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.upwork.assessment.jose.Jwks;
+import com.upwork.assessment.service.MyUserDetailsService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,7 +51,7 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
 		return http
-				.securityMatcher("/token")
+				.securityMatcher("/token","/swagger-ui/")
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/token","/swagger-ui/").permitAll())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
