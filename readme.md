@@ -36,7 +36,9 @@ You can access the documentation at `http://localhost:8080/swagger-ui.html` docu
 
 #### IDE: IntelliJ
 
+## Postman Collection 
 
+is available at https://api.postman.com/collections/2853422-30938b65-72c3-4902-900b-91aa654ff62e?access_key=PMAT-01GMXSV9S7PSNRQJ4343E4QZ6Q
 
 
 
